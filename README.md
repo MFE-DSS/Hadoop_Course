@@ -59,6 +59,15 @@ Ou, si vous avez besoin de la version 2.5 à la place :
 
 N'oubliez pas, vous avez besoin d'au moins 8 Go de RAM libre sur votre système pour exécuter HDP. Si vous n'avez pas autant de mémoire, ne vous inquiétez pas - vous pouvez toujours apprendre en regardant simplement les vidéos.
 
+###### Avertissement pour les utilisateurs d'Apple M1
+
+Si vous utilisez l'un des nouveaux ordinateurs Apple basés sur la puce M1, sachez que VirtualBox n'est pas compatible avec cette plateforme. Vous avez besoin de VirtualBox pour exécuter le bac à sable HDP utilisé dans les activités pratiques de ce cours.
+
+Autant que nous puissions le dire, Oracle n'a pas l'intention de porter VirtualBox sur la plateforme M1 ; il nécessite une puce x86. Fondamentalement, HDP nécessite une puce x86 pour fonctionner - la virtualisation ne peut pas émuler une puce entièrement différente.
+
+Si le seul système auquel vous avez accès est un système basé sur M1, nous vous recommandons de regarder simplement les vidéos des activités pratiques au lieu d'essayer de les suivre vous-même.
+
+
 ### Module 2 : MapReduce
 
 #### Objectifs pédagogiques :
