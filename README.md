@@ -36,6 +36,29 @@ Réponse correcte : c. Stockage et analyse de grandes quantités de données
 **Exercice 2 : Travaux Pratiques**
 Créer un cluster Hadoop à partir de zéro en utilisant Hadoop Common, HDFS, YARN et MapReduce.
 
+##### Installation Hortonworks
+
+###### Problèmes de téléchargement de Hortonworks Data Platform
+
+Si vous rencontrez des problèmes pour télécharger Hortonworks Data Platform...
+Dans la prochaine leçon, nous allons installer un framework complet de "big data" - Hortonworks Data Platform - sur votre propre ordinateur de bureau !
+
+Cependant, le processus de téléchargement sur le site web de Cloudera semble parfois fonctionner de manière peu fiable. Si vous constatez que vous ne pouvez pas télécharger l'image sandbox HDP 2.6.5 pour Virtualbox comme indiqué, essayez d'aller directement à cette page :
+
+[Cloudera Hortonworks Sandbox](https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html)
+
+Choisissez "Virtualbox" pour votre type d'installation, fournissez les informations qu'ils demandent, puis sélectionnez HDP 2.6.5 dans les "versions antérieures".
+
+Si cela échoue également, vous pouvez essayer un lien direct vers leur téléchargement HDP 2.6.5 :
+
+[HDP 2.6.5 Direct Download](https://archive.cloudera.com/hwx-sandbox/hdp/hdp-2.6.5/HDP_2.6.5_virtualbox_180626.ova)
+
+Ou, si vous avez besoin de la version 2.5 à la place :
+
+[HDP 2.5 Direct Download](https://archive.cloudera.com/hwx-sandbox/hdp/hdp-2.5.0/HDP_2.5_virtualbox.ova)
+
+N'oubliez pas, vous avez besoin d'au moins 8 Go de RAM libre sur votre système pour exécuter HDP. Si vous n'avez pas autant de mémoire, ne vous inquiétez pas - vous pouvez toujours apprendre en regardant simplement les vidéos.
+
 ### Module 2 : MapReduce
 
 #### Objectifs pédagogiques :
