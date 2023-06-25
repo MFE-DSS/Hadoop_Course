@@ -26,10 +26,10 @@ Hadoop MapReduce : Il s'agit d'un algorithme de traitement en parallèle pour le
 
 Quelle est la fonction principale de Hadoop ?
 
-a. Traitement des données en temps réel
-b. Traitement des transactions en ligne
-c. Stockage et analyse de grandes quantités de données
-d. Stockage de données relationnelles
+a. Traitement des données en temps réel<br>
+b. Traitement des transactions en ligne<br>
+c. Stockage et analyse de grandes quantités de données<br>
+d. Stockage de données relationnelles<br>
 
 Réponse correcte : c. Stockage et analyse de grandes quantités de données
 
@@ -52,10 +52,11 @@ Dans la phase Map, les données en entrée sont divisées en paires clé-valeur.
 
 **Exercice 3 : QCM**
 Quelle est la fonction de la phase Map dans MapReduce ?
-a. Elle trie les données
-b. Elle réduit les données à un ensemble plus petit
-c. Elle divise les données en paires clé-valeur
-d. Elle fusionne les données en un seul ensemble
+
+a. Elle trie les données<br>
+b. Elle réduit les données à un ensemble plus petit<br>
+c. Elle divise les données en paires clé-valeur<br>
+d. Elle fusionne les données en un seul ensemble<br>
 
 Réponse correcte : c. Elle divise les données en paires clé-valeur
 
