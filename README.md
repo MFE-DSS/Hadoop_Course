@@ -21,39 +21,39 @@ Data-scientists, Architectes...
 
 ## Programme de formation:
 ### Introduction 
-▪ Les fonctionnalités du framework Hadoop
-▪ Le projet et les modules : Hadoop Common, HDFS, YARN, MapReduce
-▪ Utilisation de yarn pour piloter les jobs mapreduce
+▪ Les fonctionnalités du framework Hadoop<br>
+▪ Le projet et les modules : Hadoop Common, HDFS, YARN, MapReduce<br>
+▪ Utilisation de yarn pour piloter les jobs mapreduce<br>
 ### MapReduce
-▪ Principe et objectifs du modèle de programmation MapReduce
-▪ Fonctions map() et reduce() Couples (clés, valeurs)
-▪ Implémentation par le framework Hadoop
-▪ Etude de la collection d'exemples
+▪ Principe et objectifs du modèle de programmation MapReduce<br>
+▪ Fonctions map() et reduce() Couples (clés, valeurs)<br>
+▪ Implémentation par le framework Hadoop<br>
+▪ Etude de la collection d'exemples<br>
 ### Programmation
-▪ Configuration des jobs, notion de configuration
-▪ Les interfaces principales : mapper, reducer,
-▪ La chaîne de production : entrées, input splits, mapper, combiner, shuffle/sort, reducer, sortie
-▪ Partitioner, outputcollector, codecs, compresseurs
-▪ Format des entrées et sorties d'un job MapReduce : InputFormat et OutputFormat
+▪ Configuration des jobs, notion de configuration<br>
+▪ Les interfaces principales : mapper, reducer,<br>
+▪ La chaîne de production : entrées, input splits, mapper, combiner, shuffle/sort, reducer, sortie<br>
+▪ Partitioner, outputcollector, codecs, compresseurs<br>
+▪ Format des entrées et sorties d'un job MapReduce : InputFormat et OutputFormat<br>
 ### Streaming 
-▪ Définition du streaming map/reduce
-▪ Création d'un job map/reduce en Python
-▪ Répartition sur la ferme
-▪ Avantage et inconvénients
-▪ Liaisons avec des systèmes externes
-▪ Introduction au pont HadoopR
+▪ Définition du streaming map/reduce<br>
+▪ Création d'un job map/reduce en Python<br>
+▪ Répartition sur la ferme<br>
+▪ Avantage et inconvénients<br>
+▪ Liaisons avec des systèmes externes<br>
+▪ Introduction au pont HadoopR<br>
 ### Pig
-▪ Pattern et best practices Map/reduce
-▪ Introduction à Pig
-▪ Caractéristiques du langage : latin
-▪ Les fonctions de bases
-▪ Ajouts de fonctions personnalisées
-▪ Les UDF
-▪ Mise en œuvre
+▪ Pattern et best practices Map/reduce<br>
+▪ Introduction à Pig<br>
+▪ Caractéristiques du langage : latin<br>
+▪ Les fonctions de bases<br>
+▪ Ajouts de fonctions personnalisées<br>
+▪ Les UDF<br>
+▪ Mise en œuvre<br>
 ### Hive
-  ▪ Simplification du requêtage
-  ▪ Syntaxe de base  
-  Sécurité en environnement Hadoop  : Mécanisme de gestion de l'authentification  
+  ▪ Simplification du requêtage<br>
+  ▪ Syntaxe de base  <br>
+  Sécurité en environnement Hadoop  : Mécanisme de gestion de l'authentification  <br>
 
 ## Jour 1
 
