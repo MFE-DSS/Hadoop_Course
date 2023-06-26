@@ -126,6 +126,13 @@ Si vous rencontrez des problèmes pour télécharger l'ensemble de données ml-1
 
 [Download ml-100k.zip](http://media.sundog-soft.com/es/ml-100k.zip)
 
+###### Connect to Hadoop using CMD/Putty SSH
+
+- SSH credentials : maria_dev@127.0.0.1
+- port : 2222
+- Password in CMD : maria_dev
+  
+###### Putting DATA using CMD : 
 
 
 
