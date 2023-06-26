@@ -133,8 +133,17 @@ Si vous rencontrez des problèmes pour télécharger l'ensemble de données ml-1
 - Password in CMD : maria_dev
   
 ###### Putting DATA using CMD : 
-
-
+- hadoop fs -mkdir movies_data_cmd
+- Get the data : git clone https://github.com/jamesyangwang/elasticsearch.git
+- cd elasticsearch
+- ls
+- mv ml-latest-small ../movies_all
+- cd ..
+- ls
+- cd movies_all
+- hadoop fs -copyFromLocal movies.csv movies_data_cmd/movies.csv
+- hadoop fs -copyFromLocal ratings.csv movies_data_cmd/ratings.csv
+- hadoop fs -ls 
 
 ### Module 2 : MapReduce
 
