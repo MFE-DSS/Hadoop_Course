@@ -2,6 +2,59 @@
 
 Ce cours est destiné à aider les développeurs, les chefs de projets, les data-scientists, et les architectes à comprendre et à maîtriser l'écosystème Hadoop.
 
+## Objectif de la formation : 
+A l’issue de la formation, le stagiaire sera capable de développer des applications compatibles avec la plateforme Hadoop d'Apache pour traiter des
+données Big Data.
+
+### Objectifs pédagogiques:
+Comprendre l’écosystème
+Hadoop Cloudera/Hortonworks
+Présenter les principes du
+Framework Hadoop
+Mettre en oeuvre des tâches
+Hadoop pour extraire des éléments pertinents d'ensembles de données volumineux et variés
+Développer des algorithmes parallèles efficaces avec MapReduce
+Charger des données non structurées des systèmes HDFS et Hbase
+Comprendre et mettre en œuvre un traitement temps réel
+Public concerné : Développeurs, Chefs de projets,
+Data-scientists, Architectes...
+
+## Programme de formation:
+### Introduction 
+▪ Les fonctionnalités du framework Hadoop
+▪ Le projet et les modules : Hadoop Common, HDFS, YARN, MapReduce
+▪ Utilisation de yarn pour piloter les jobs mapreduce
+### MapReduce
+▪ Principe et objectifs du modèle de programmation MapReduce
+▪ Fonctions map() et reduce() Couples (clés, valeurs)
+▪ Implémentation par le framework Hadoop
+▪ Etude de la collection d'exemples
+### Programmation
+▪ Configuration des jobs, notion de configuration
+▪ Les interfaces principales : mapper, reducer,
+▪ La chaîne de production : entrées, input splits, mapper, combiner, shuffle/sort, reducer, sortie
+▪ Partitioner, outputcollector, codecs, compresseurs
+▪ Format des entrées et sorties d'un job MapReduce : InputFormat et OutputFormat
+### Streaming 
+▪ Définition du streaming map/reduce
+▪ Création d'un job map/reduce en Python
+▪ Répartition sur la ferme
+▪ Avantage et inconvénients
+▪ Liaisons avec des systèmes externes
+▪ Introduction au pont HadoopR
+### Pig
+▪ Pattern et best practices Map/reduce
+▪ Introduction à Pig
+▪ Caractéristiques du langage : latin
+▪ Les fonctions de bases
+▪ Ajouts de fonctions personnalisées
+▪ Les UDF
+▪ Mise en œuvre
+### Hive
+  ▪ Simplification du requêtage
+  ▪ Syntaxe de base  
+  Sécurité en environnement Hadoop  : Mécanisme de gestion de l'authentification  
+
 ## Jour 1
 
 ### Module 1 : Introduction à Hadoop
@@ -66,6 +119,14 @@ Si vous utilisez l'un des nouveaux ordinateurs Apple basés sur la puce M1, sach
 Autant que nous puissions le dire, Oracle n'a pas l'intention de porter VirtualBox sur la plateforme M1 ; il nécessite une puce x86. Fondamentalement, HDP nécessite une puce x86 pour fonctionner - la virtualisation ne peut pas émuler une puce entièrement différente.
 
 Si le seul système auquel vous avez accès est un système basé sur M1, nous vous recommandons de regarder simplement les vidéos des activités pratiques au lieu d'essayer de les suivre vous-même.
+
+###### Emplacement de téléchargement alternatif pour MovieLens
+
+Si vous rencontrez des problèmes pour télécharger l'ensemble de données ml-100k à partir de grouplens.org, utilisez cet emplacement de téléchargement à la place :
+
+[Download ml-100k.zip](http://media.sundog-soft.com/es/ml-100k.zip)
+
+
 
 
 ### Module 2 : MapReduce
