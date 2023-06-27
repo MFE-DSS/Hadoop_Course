@@ -380,8 +380,7 @@ Cas 1 :
     def upper_first_char(str: String) : 
         return upper(str.charAt(0).toString()) + str[1-$]
         
-    SELECT upper_first_char(name) FROM Users
-    
+    SELECT upper_first_char(name) FROM Users ==> correct
     upper_first_char("aaaaa") ==> incorrect
 ```
 
@@ -391,9 +390,8 @@ Cas 2 :
     -->function 
     def upper_first_char(str: String) : 
         return upper(str.charAt(0).toString()) + str[1-$]
-
+  ```
     upper_first_char("aaaaa") ==> correct
-  ```  
     SELECT upper_first_char(name) FROM Users ==> incorrect
 
 
