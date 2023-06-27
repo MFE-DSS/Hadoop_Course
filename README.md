@@ -143,7 +143,7 @@ Si vous rencontrez des problèmes pour télécharger l'ensemble de données ml-1
 - cd movies_all
 - hadoop fs -copyFromLocal movies.csv movies_data_cmd/movies.csv
 - hadoop fs -copyFromLocal ratings.csv movies_data_cmd/ratings.csv
-- hadoop fs -ls 
+- hadoop fs -ls
 
 ### Module 2 : MapReduce
 
@@ -156,6 +156,141 @@ Si vous rencontrez des problèmes pour télécharger l'ensemble de données ml-1
 MapReduce est un modèle de programmation pour le traitement en parallèle. Il divise une tâche en deux parties : une phase de "Map" où il effectue des opérations sur un ensemble de données, et une phase de "Reduce" où il agrège les résultats. En utilisant MapReduce, nous pouvons traiter de grandes quantités de données de manière distribuée sur un cluster de machines.
 
 Dans la phase Map, les données en entrée sont divisées en paires clé-valeur. Ensuite, chaque paire clé-valeur est traitée et une sortie intermédiaire est générée. Dans la phase Reduce, les paires clé-valeur intermédiaires sont regroupées par clé et traitées pour générer la sortie finale.
+
+## MRjob Installation for HDP 2.6.5 : 
+#### Notes on MRJob Installation
+
+This repository contains notes and instructions for installing the "mrjob" package for MapReduce on the HDP Sandbox.
+
+##### Installation on HDP 2.65
+
+To install mrjob on HDP 2.65, follow the steps below:
+
+1. Save the HDP-SOLR-2.6-100 configuration:
+  ```ruby
+  yum-config-manager --save --setopt=HDP-SOLR-2.6-100.skip_if_unavailable=true
+  ```
+
+2. Install the required packages:
+  ```ruby
+  yum install https://repo.ius.io/ius-release-el7.rpm https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+  yum install python-pip
+  ```
+
+3. Install the "pathlib" package using pip:
+  ```ruby
+  pip install pathlib
+  ```
+
+4. Install mrjob version 0.7.4:
+  ```ruby
+  pip install mrjob==0.7.4
+  ```
+
+5. Install PyYAML version 5.4.1:
+  ```ruby
+  pip install PyYAML==5.4.1
+  ```
+
+
+6. Install the nano text editor:
+  ```ruby
+  yum install nano
+  ```
+
+7. Download the required files:
+  ```ruby
+  wget http://media.sundog-soft.com/hadoop/RatingsBreakdown.py
+  wget http://media.sundog-soft.com/hadoop/ml-100k/u.data
+  ```
+
+
+##### Installation on HDP 2.5
+
+If you encounter an error when running `pip install google-api-python-client==1.6.4` during the installation on HDP 2.5, follow these steps:
+
+1. Update your sandbox to Python 2.7:
+   
+ ```ruby
+  yum install scl-utils
+  yum install centos-release-scl
+  yum install python27
+  scl enable python27 bash
+ ```
+
+2. After updating to Python 2.7, install the required package:
+
+ ```ruby
+  pip install google-api-python-client==1.6.4
+ ```
+
+## MRjob DEV : 
+
+1. Contenu de RatingsBreakdown.py :
+
+ ```python
+      from mrjob.job import MRJob
+      from mrjob.step import MRStep
+      
+      class RatingsBreakdown(MRJob):
+          def steps(self):
+              return [
+                  MRStep(mapper=self.mapper_get_ratings,
+                         reducer=self.reducer_count_ratings)
+              ]
+      
+          def mapper_get_ratings(self, _, line):
+              (userID, movieID, rating, timestamp) = line.split('\t')
+              yield rating, 1
+      
+          def reducer_count_ratings(self, key, values):
+              yield key, sum(values)
+      
+      if __name__ == '__main__':
+          RatingsBreakdown.run()
+ ```
+
+2. Contenu de MostPopularMovie.py :
+
+```python
+  from mrjob.job import MRJob
+  from mrjob.step import MRStep
+  
+  class MostPopularMovie(MRJob):
+      def steps(self):
+          return [
+              MRStep(mapper=self.mapper_get_ratings,
+                     reducer=self.reducer_count_ratings),
+              MRStep(reducer=self.reducer_sorted_output)
+          ]
+  
+      def mapper_get_ratings(self, _, line):
+          (userID, movieID, rating, timestamp) = line.split('\t')
+          yield movieID, 1
+  
+      def reducer_count_ratings(self, movie, countList):
+          yield None, (sum(countList), movie)
+  
+      def reducer_sorted_output(self, _, movies_count):
+          for count, movie in sorted(movies_count, reverse=True):
+              yield movie, count
+  
+  if __name__ == '__main__':
+      MostPopularMovie.run()
+```
+
+3. Get the data :
+   ```ruby
+   wget http://media.sundog-soft.com/hadoop/ml-100k/u.data
+   ```
+5. Run MRJob in Local :
+   ```ruby
+    python MostPopularMovieSort.py u.data
+   ```
+6. Run MRJob in Cluster :
+    ```ruby
+     sudo python RatingsBreakdown.py -r hadoop --hadoop-streaming-jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming.jar "hdfs:///usr/maria_dev/movies_data_cmd/u.data"
+     ```
 
 #### Exercices :
 
@@ -174,38 +309,7 @@ Développer un algorithme MapReduce pour compter le nombre de mots dans un texte
 
 ## Jour 2
 
-### Module 3 : Programmation avec Hadoop
-
-#### Objectifs pédagogiques :
-- Savoir configurer des jobs MapReduce
-- Comprendre les interfaces principales de Hadoop
-- Connaître le processus de production d'un job MapReduce
-
-#### Cours :
-[Contenu du cours]
-
-#### Exercices :
-
-**Exercice 5 : Travaux Pratiques**
-Développer un job MapReduce pour filtrer les tweets contenant un mot spécifique à partir d'un ensemble de données de Twitter.
-
-### Module 4 : Streaming avec Hadoop
-
-#### Objectifs pédagogiques :
-- Comprendre le streaming Map/Reduce
-- Savoir créer des jobs Map/Reduce en Python
-
-#### Cours :
-[Contenu du cours]
-
-#### Exercices :
-
-**Exercice 6 : Travaux Pratiques**
-Créer un job de streaming Map/Reduce en Python pour compter le nombre de mots dans un texte.
-
-## Jour 3
-
-### Module 5 : Pig et Hive
+### Module 3 : Pig et Hive
 
 #### Objectifs pédagogiques :
 - Connaître les bases de Pig et Hive
