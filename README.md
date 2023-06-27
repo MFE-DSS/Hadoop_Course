@@ -321,11 +321,11 @@ Développer un algorithme MapReduce pour compter le nombre de mots dans un texte
 #### Exercices :
 
 **Exercice 7 : QCM**
-Quel outil permet d'écrire des requêtes SQL pour extraire des données de Hadoop?
-a. Pig
-b. Hive
-c. HBase
-d. Spark
+Quel outil permet d'écrire des requêtes SQL pour extraire des données de Hadoop?<br>
+a. Pig<br>
+b. Hive<br>
+c. HBase<br>
+d. Spark<br>
 
 Réponse correcte : b. Hive
 
@@ -334,18 +334,3 @@ Réponse correcte : b. Hive
 
 **Exercice 9 : Travaux Pratiques**
 Écrire une requête Hive pour obtenir le nombre total de tweets contenant le mot "Hadoop".
-
-### Module 6 : Sécurité en environnement Hadoop
-
-#### Objectifs pédagogiques :
-- Comprendre le mécanisme de gestion de l'authentification en environnement Hadoop
-
-#### Cours :
-[Contenu du cours]
-
-#### Exercices :
-
-**Exercice 10 : Travaux Pratiques**
-Configurer l'authentification Kerberos pour un cluster Hadoop.
-
-Ceci complète le cours de formation de trois jours sur Hadoop. Nous espérons que cela vous aidera à développer une bonne compréhension de Hadoop et de ses capacités.
