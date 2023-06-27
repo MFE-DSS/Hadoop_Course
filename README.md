@@ -330,12 +330,17 @@ class MostPopularMovie(MRJob):
 if __name__ == '__main__':
     MostPopularMovie.run()
 ```
+5. Run MRJob with titles format :
 
-5. Run MRJob in Local :
+ ```ruby
+    python MostPopularMovieSort.py u.data --movies u.item
+ ```
+
+6. Run MRJob in Local :
    ```ruby
     python MostPopularMovieSort.py u.data
    ```
-6. Run MRJob in Cluster :
+7. Run MRJob in Cluster :
     ```ruby
      sudo python RatingsBreakdown.py -r hadoop --hadoop-streaming-jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming.jar "hdfs:///usr/maria_dev/movies_data_cmd/u.data"
      ```
