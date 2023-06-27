@@ -226,7 +226,13 @@ If you encounter an error when running `pip install google-api-python-client==1.
 
 ## MRjob DEV : 
 
-1. Contenu de RatingsBreakdown.py :
+1. Get the data :
+   ```ruby
+   wget http://media.sundog-soft.com/hadoop/ml-100k/u.data
+   wget http://media.sundog-soft.com/hadoop/ml-100k/u.item
+   ```
+
+2. Contenu de RatingsBreakdown.py :
 
  ```python
       from mrjob.job import MRJob
@@ -250,7 +256,7 @@ If you encounter an error when running `pip install google-api-python-client==1.
           RatingsBreakdown.run()
  ```
 
-2. Contenu de MostPopularMovie.py :
+3. Contenu de MostPopularMovie.py :
 
 ```python
   from mrjob.job import MRJob
@@ -278,11 +284,53 @@ If you encounter an error when running `pip install google-api-python-client==1.
   if __name__ == '__main__':
       MostPopularMovie.run()
 ```
+4. Contenu de MostPopularMovie.py avec affichage des titres des films :
 
-3. Get the data :
-   ```ruby
-   wget http://media.sundog-soft.com/hadoop/ml-100k/u.data
-   ```
+```python
+from mrjob.job import MRJob
+from mrjob.step import MRStep
+import codecs
+
+class MostPopularMovie(MRJob):
+    def configure_args(self):
+        super(MostPopularMovie, self).configure_args()
+        self.add_file_arg('--movies', help='Path to the movies file')
+
+    def steps(self):
+        return [
+            MRStep(mapper=self.mapper_get_ratings,
+                   reducer=self.reducer_count_ratings),
+            MRStep(reducer=self.reducer_sorted_output)
+        ]
+
+    def mapper_get_ratings(self, _, line):
+        (userID, movieID, rating, timestamp) = line.split('\t')
+        yield movieID, 1
+
+    def reducer_count_ratings(self, movie, countList):
+        yield None, (sum(countList), movie)
+
+    def reducer_sorted_output(self, _, movies_count):
+        movie_names = self.load_movie_names()
+        for count, movie in sorted(movies_count, reverse=True):
+            if movie in movie_names:
+                yield movie_names[movie], count
+
+    def load_movie_names(self):
+        movie_names = {}
+        with codecs.open(self.options.movies, 'r', encoding='latin-1') as f:
+            for line in f:
+                fields = line.strip().split('|')
+                if len(fields) >= 2:
+                    movie_id = fields[0]
+                    movie_name = fields[1]
+                    movie_names[movie_id] = movie_name
+        return movie_names
+
+if __name__ == '__main__':
+    MostPopularMovie.run()
+```
+
 5. Run MRJob in Local :
    ```ruby
     python MostPopularMovieSort.py u.data
