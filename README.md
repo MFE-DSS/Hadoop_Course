@@ -369,7 +369,33 @@ Développer un algorithme MapReduce pour compter le nombre de mots dans un texte
 - Savoir écrire des requêtes Pig et Hive
 
 #### Cours :
-[Contenu du cours]
+
+#### UDF (User Defined Function) :
+UDF ---> traite une colonne dans un dataframe (relation, table, fichier ...)
+
+Cas 1 :
+
+```scala
+    -->UDF
+    def upper_first_char(str: String) : 
+        return upper(str.charAt(0).toString()) + str[1-$]
+        
+    SELECT upper_first_char(name) FROM Users
+    
+    upper_first_char("aaaaa") ==> incorrect
+```
+
+Cas 2 :
+
+```scala
+    -->function 
+    def upper_first_char(str: String) : 
+        return upper(str.charAt(0).toString()) + str[1-$]
+
+    upper_first_char("aaaaa") ==> correct
+  ```  
+    SELECT upper_first_char(name) FROM Users ==> incorrect
+
 
 #### Exercices :
 
