@@ -333,7 +333,7 @@ if __name__ == '__main__':
 5. Run MRJob with titles format :
 
  ```ruby
-    python MostPopularMovieSort.py u.data --movies u.item
+    python MostPopularMovie.py u.data --movies u.item
  ```
 
 6. Run MRJob in Local :
