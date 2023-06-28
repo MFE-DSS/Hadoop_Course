@@ -486,9 +486,9 @@ Réponse correcte : b. Hive
 
 ### Module 4 : Analyse des flux de données (Streaming)
 
-1- Spark Streaming : Introduction
-2- Analyser les journaux web publiés avec Flume en utilisant Spark Streaming
-3- Surveiller en temps réel les journaux publiés par Flume à la recherche d'erreurs [Exercice] 
-4- Solution de l'exercice : Agréger les codes d'accès HTTP avec Spark Streaming
-5- Apache Storm : Introduction
-6- Compter les mots avec Storm [Activité]
+1- Spark Streaming : Introduction <br>
+2- Analyser les journaux web publiés avec Flume en utilisant Spark Streaming<br>
+3- Surveiller en temps réel les journaux publiés par Flume à la recherche d'erreurs [Exercice] <br>
+4- Solution de l'exercice : Agréger les codes d'accès HTTP avec Spark Streaming<br>
+5- Apache Storm : Introduction<br>
+6- Compter les mots avec Storm [Activité]<br>
