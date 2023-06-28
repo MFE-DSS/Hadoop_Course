@@ -481,3 +481,14 @@ Réponse correcte : b. Hive
 
 **Exercice 9 : Travaux Pratiques**
 Écrire une requête Hive pour obtenir le nombre total de tweets contenant le mot "Hadoop".
+
+## Jour 3
+
+### Module 4 : Analyse des flux de données (Streaming)
+
+1- Spark Streaming : Introduction
+2- Analyser les journaux web publiés avec Flume en utilisant Spark Streaming
+3- Surveiller en temps réel les journaux publiés par Flume à la recherche d'erreurs [Exercice] 
+4- Solution de l'exercice : Agréger les codes d'accès HTTP avec Spark Streaming
+5- Apache Storm : Introduction
+6- Compter les mots avec Storm [Activité]
