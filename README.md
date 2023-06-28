@@ -413,6 +413,57 @@ Cas 2 :
     upper_first_char("aaaaa") ==> correct
     SELECT upper_first_char(name) FROM Users ==> incorrect
 
+#### Exécution d'un programme Pig sur HDFS
+
+Ce guide décrit les étapes pour exécuter un programme Pig sur HDFS au sein de votre cluster Hadoop.
+
+##### Prérequis
+
+- Configurez et assurez-vous d'avoir un cluster Hadoop opérationnel.
+
+##### Étapes
+
+1. **Préparation du script Pig :**
+   - Rédigez votre script Pig en utilisant le langage Pig Latin ou utilisez un script existant.
+   - Enregistrez votre script Pig avec une extension de fichier `.pig`.
+
+2. **Chargement du script Pig sur HDFS :**
+   - Utilisez la commande suivante pour charger votre script Pig sur HDFS :
+     ```bash
+     hadoop fs -put local_script.pig /user/hadoop/scripts/
+     ```
+
+3. **Démarrage de l'environnement Pig :**
+   - Lancez l'environnement Pig en exécutant la commande suivante :
+     ```bash
+     pig
+     ```
+
+4. **Chargement et exécution du script Pig depuis HDFS :**
+   - À l'intérieur de l'environnement Pig, chargez et exécutez votre script Pig en utilisant la commande `run`. Par exemple :
+     ```pig
+     pig> run /user/hadoop/scripts/local_script.pig
+     ```
+
+5. **Chargement et exécution du script Pig depuis la ligne de commande :**
+   - Par exemple :
+     ```pig
+     pig  hdfs:///user/hadoop/scripts/local_script.pig
+     ```
+
+6. **Suivi de l'exécution du job Pig :**
+   - Suivez l'avancement de votre job Pig via la sortie console ou le gestionnaire de tâches Hadoop, selon la configuration de votre cluster Hadoop.
+
+7. **Récupération des résultats :**
+   - Une fois que le job Pig est terminé avec succès, vous pouvez retrouver les résultats dans le répertoire de sortie spécifié sur HDFS.
+
+8. **Nettoyage :**
+   - Supprimez les fichiers temporaires ou les données inutiles générés lors de l'exécution de votre programme Pig.
+
+Assurez-vous d'adapter les chemins et les noms de fichiers en fonction de votre configuration et de vos besoins spécifiques.
+
+En suivant ces étapes, vous pourrez exécuter un programme Pig sur HDFS au sein de votre cluster Hadoop.
+
 
 #### Exercices :
 
