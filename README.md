@@ -370,6 +370,25 @@ Développer un algorithme MapReduce pour compter le nombre de mots dans un texte
 
 #### Cours :
 
+#### Différence entre les opérateurs `::` et `.` en Pig
+
+En Pig, les opérateurs `::` et `.` ont des significations différentes et sont utilisés dans des contextes différents.
+
+1. Opérateur `::` :
+   - L'opérateur `::` est utilisé pour la projection de champs (field projection) en Pig. Il permet d'accéder aux champs d'un tuple ou d'un bag.
+   - Il vous permet de référencer un champ par sa position au sein d'un tuple ou d'un bag. La position commence à partir de 0.
+   - Par exemple, si vous avez un tuple nommé `myTuple` avec les champs `field1`, `field2` et `field3`, vous pouvez accéder à `field2` en utilisant l'opérateur `::` : `myTuple.field2`.
+   - De même, si vous avez un bag nommé `myBag` contenant des tuples avec les champs `field1` et `field2`, vous pouvez accéder à `field1` en utilisant l'opérateur `::` : `myBag.field1`.
+
+2. Opérateur `.` :
+   - L'opérateur `.` est utilisé pour accéder aux champs et méthodes des objets en Pig Latin.
+   - Il est utilisé pour accéder aux champs et appeler les méthodes des objets créés à l'aide de fonctions définies par l'utilisateur (UDFs) ou de fonctions intégrées à Pig.
+   - Par exemple, si vous avez une fonction intégrée à Pig appelée `COUNT`, vous pouvez l'appeler en utilisant l'opérateur `.` : `COUNT()`.
+   - De même, si vous avez une UDF personnalisée appelée `myUDF` qui possède une méthode nommée `myMethod`, vous pouvez l'appeler en utilisant l'opérateur `.` : `myUDF.myMethod()`.
+
+En résumé, l'opérateur `::` est utilisé pour la projection de champs au sein de tuples et de bags, tandis que l'opérateur `.` est utilisé pour accéder aux champs et méthodes des objets, tels que les UDF ou les fonctions intégrées à Pig.
+
+
 #### UDF (User Defined Function) :
 UDF ---> traite une colonne dans un dataframe (relation, table, fichier ...)
 
