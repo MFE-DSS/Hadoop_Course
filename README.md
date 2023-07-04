@@ -1,4 +1,4 @@
-# Cours de formation Apache Hadoop
+# Hadoop DEV
 
 Ce cours est destiné à aider les développeurs, les chefs de projets, les data-scientists, et les architectes à comprendre et à maîtriser l'écosystème Hadoop.
 
@@ -533,3 +533,132 @@ if __name__ == "__main__":
 ```ruby
 spark-submit main.py
 ```
+
+#### Agréger les URLs HTTP avec Spark Streaming à partir des journaux Web en utilisant le windowing
+
+##### Etapes :
+
+- Cmd settings :
+  
+  Download files :
+  ```ruby
+  wget http://media.sundog-soft.com/hadoop/access_log.txt
+  wget http://media.sundog-soft.com/hadoop/SparkFlume.py
+  wget http://media.sundog-soft.com/hadoop/sparkstreamingflume.conf
+  ```
+  
+- Cmd Client :
+  
+  Run client & waiting server messages :
+  ```ruby
+  spark-submit --packages org.apache.spark:spark-streaming-flume_2.11:2.3.0 SparkFlume.py
+  ```
+  ![image](https://github.com/MourabitElBachir/Hadoop_Course/assets/32568108/59d57c37-a8d1-473a-920b-6d13bb5d9ffc)
+
+  
+- Cmd server :
+  Run server & reading logs continuously :
+  ```ruby
+  cd /usr/hdp/current/flume-server
+  ```
+  ```ruby
+  bin/flume-ng agent --conf conf --conf-file ~/sparkstreamingflume.conf --name a1
+  ```
+  ![image](https://github.com/MourabitElBachir/Hadoop_Course/assets/32568108/06e73b26-9d13-4c55-9b80-936aef2cbda5)
+
+- Cmd settings :
+  
+  Put logs on the spool as in the conf file of Flume :
+  
+  ```ruby
+    cp access_log.txt spool/log22.txt
+    cp access_log.txt spool/log23.txt
+    cp access_log.txt spool/log24.txt
+    cp access_log.txt spool/log25.txt
+    cp access_log.txt spool/log26.txt
+    cp access_log.txt spool/log27.txt
+    cp access_log.txt spool/log28.txt
+    cp access_log.txt spool/log29.txt
+    cp access_log.txt spool/log30.txt
+    cp access_log.txt spool/log0001.txt
+    cp access_log.txt spool/log0002.txt
+    cp access_log.txt spool/log0003.txt
+  ```
+  - Results :
+    ![image](https://github.com/MourabitElBachir/Hadoop_Course/assets/32568108/caf6696f-efaa-45d5-a320-849181551ac0)
+
+- Fichier PySpark à exécuter : 
+```python
+from pyspark import SparkContext
+from pyspark.streaming import StreamingContext
+from pyspark.streaming.flume import FlumeUtils
+
+parts = [
+    r'(?P<host>\S+)',                   # host %h
+    r'\S+',                             # indent %l (unused)
+    r'(?P<user>\S+)',                   # user %u
+    r'\[(?P<time>.+)\]',                # time %t
+    r'"(?P<request>.+)"',               # request "%r"
+    r'(?P<status>[0-9]+)',              # status %>s
+    r'(?P<size>\S+)',                   # size %b (careful, can be '-')
+    r'"(?P<referer>.*)"',               # referer "%{Referer}i"
+    r'"(?P<agent>.*)"',                 # user agent "%{User-agent}i"
+]
+pattern = re.compile(r'\s+'.join(parts)+r'\s*\Z')
+
+def extractURLRequest(line):
+    exp = pattern.match(line)
+    if exp:
+        request = exp.groupdict()["request"]
+        if request:
+           requestFields = request.split()
+           if (len(requestFields) > 1):
+                return requestFields[1]
+
+
+if __name__ == "__main__":
+
+    sc = SparkContext(appName="StreamingFlumeLogAggregator")
+    sc.setLogLevel("ERROR")
+    ssc = StreamingContext(sc, 1)
+
+    flumeStream = FlumeUtils.createStream(ssc, "localhost", 9092)
+
+    lines = flumeStream.map(lambda x: x[1])
+    urls = lines.map(extractURLRequest)
+
+    # Reduce by URL over a 5-minute window sliding every second
+    urlCounts = urls.map(lambda x: (x, 1)).reduceByKeyAndWindow(lambda x, y: x + y, lambda x, y : x - y, 300, 1)
+
+    # Sort and print the results
+    sortedResults = urlCounts.transform(lambda rdd: rdd.sortBy(lambda x: x[1], False))
+    sortedResults.pprint()
+
+    ssc.checkpoint("/home/maria_dev/checkpoint")
+    ssc.start()
+    ssc.awaitTermination()
+```
+1. Les premières lignes sont des imports nécessaires pour utiliser les fonctionnalités de PySpark et de Spark Streaming.
+
+2. Ensuite, une expression régulière est définie pour extraire les champs d'une ligne de journal Flume. Cette expression régulière est utilisée pour analyser chaque ligne de journal et extraire la requête URL à partir de la ligne.
+
+3. La fonction extractURLRequest prend une ligne de journal comme entrée et utilise l'expression régulière pour extraire la requête URL de cette ligne.
+
+4. La condition if __name__ == "__main__": permet de s'assurer que le code n'est exécuté que lorsque le fichier est exécuté directement (et non importé en tant que module).
+
+5. Le code crée un SparkContext et un StreamingContext pour initialiser l'environnement de streaming Spark.
+
+6. En utilisant FlumeUtils.createStream, le code crée un flux de données Spark à partir de Flume. Cela permet de recevoir les journaux Flume en continu dans Spark Streaming.
+
+7. Les lignes du flux de données sont extraites et mappées pour obtenir uniquement le contenu du message, qui correspond à chaque ligne de journal.
+
+8. Les URLs sont extraites à l'aide de la fonction extractURLRequest en utilisant map.
+
+9. Les URL sont ensuite agrégées et comptées sur une fenêtre de 5 minutes avec un décalage d'une seconde. Cela permet d'obtenir le nombre d'occurrences de chaque URL dans une fenêtre de temps donnée.
+
+10. Les résultats sont triés par nombre d'occurrences (de manière décroissante) et affichés à l'aide de pprint.
+
+11. Une configuration de checkpoint est définie pour la sauvegarde des données intermédiaires du streaming.
+
+12. Le streaming est démarré avec ssc.start() et le programme attend jusqu'à ce qu'il soit terminé avec ssc.awaitTermination().
+
